@@ -45,9 +45,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\ButtonScript.cs" />
      <Compile Include="Assets\Script\CellClick.cs" />
      <Compile Include="Assets\Script\CellImgScript.cs" />
      <Compile Include="Assets\Script\FieldScript.cs" />
+     <Compile Include="Assets\Script\FightScript.cs" />
+     <Compile Include="Assets\Script\GuiScript.cs" />
      <Compile Include="Assets\Script\RotateButtonScript.cs" />
      <Compile Include="Assets\Script\structPoint.cs" />
  <Reference Include="UnityEngine.UI">

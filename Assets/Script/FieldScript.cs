@@ -6,12 +6,23 @@ public class FieldScript : MonoBehaviour {
 
     public GameObject letter, number, fieldCell, rotateB;
 
+    public GameObject copyFieldTo;
+
+    public GameObject opponent;
+
+    public bool AiEnable = false;
+    bool AIcheatMode = false;
+
+    public Camera CameraEnd;
 
     int fieldSize = 10;
 
-    int GameState = 0;
+    public int GameState = 0;
     int CurrentShipType = 4;
     int CurrentShipDirrection = 0;
+    bool AIcanShot = false;
+
+    public bool ShipforWindow = true;
 
     GameObject[] ShipForWindowY;
     GameObject[] ShipForWindowX;
@@ -19,23 +30,44 @@ public class FieldScript : MonoBehaviour {
 
     GameObject[] letters;
     GameObject[] numbers;
-    GameObject[,] field;
+    public GameObject[,] field;
 
     public bool FieldLock = false;
     public bool HideShips = false;
 
     int[] ShipsCount = { 0, 4, 3, 2, 1 };
 
-    struct Coords
+    int WinCounter = 20;
+
+    List<Coords> AIshotList = new List<Coords>();
+
+    public struct Coords
     {
         public int X, Y;
     }
-    struct Ship
+    public struct Ship
     {
         public Coords[] ShipCoords;
     }
 
-    List<Ship> ShipsList = new List<Ship>();
+    public List<Ship> ShipsList = new List<Ship>();
+
+    public void CopyField()
+    {
+        if (copyFieldTo != null)
+        {
+            copyFieldTo.GetComponent<FieldScript>().ShipsList.Clear();
+
+            copyFieldTo.GetComponent<FieldScript>().ShipsList.AddRange(ShipsList);
+            for (int i = 0; i < fieldSize; i++)
+            {
+                for (int j = 0; j < fieldSize; j++)
+                {
+                    copyFieldTo.GetComponent<FieldScript>().field[i, j].GetComponent<CellImgScript>().imgId = field[i, j].GetComponent<CellImgScript>().imgId;
+                }
+            }
+        }
+    }
 
     void BuildField()
     {
@@ -165,7 +197,6 @@ public class FieldScript : MonoBehaviour {
 
         return null;
     }
-    public string str;
     bool CheckIfPlaceable(Coords[] coords)
     {
         if (coords != null)
@@ -185,7 +216,6 @@ public class FieldScript : MonoBehaviour {
     bool PlacingShip (int ShipType, int Direction, int X, int Y)
     {
         Coords[] coordsT = CheckPlacingShip(ShipType, Direction, X, Y);
-        str += CheckIfPlaceable(coordsT).ToString() + " ";
         if (coordsT != null)
         {
             if (CheckIfPlaceable(coordsT))
@@ -198,7 +228,6 @@ public class FieldScript : MonoBehaviour {
                 Ship sh;
                 sh.ShipCoords = coordsT;
                 ShipsList.Add(sh);
-
                 return true;
             }
         }
@@ -264,14 +293,26 @@ public class FieldScript : MonoBehaviour {
             if ((XX[i] > -1) && (YY[i] > -1) && (XX[i] < 10) && (YY[i] < 10))
             {
                 if (field[XX[i], YY[i]].GetComponent<CellImgScript>().imgId == 0)
+                {
                     field[XX[i], YY[i]].GetComponent<CellImgScript>().imgId = 2;
+                    if (!AiEnable)
+                    {
+                        Coords c;
+                        c.X = XX[i];
+                        c.Y = YY[i];
+                        opponent.GetComponent<FieldScript>().AIshotList.Add(c);
+                    }
+                }
             }
         }
     }
-    void FieldClear()
+    public void FieldClear()
     {
+        WinCounter = 20;
+        AIcheatMode = false;
         ShipsCount = new int[] { 0, 4, 3, 2, 1 };
         ShipsList.Clear();
+        AIshotList.Clear();
         CurrentShipType = 4;
         foreach (GameObject go in field)
         {
@@ -280,7 +321,7 @@ public class FieldScript : MonoBehaviour {
         ShipForWindowUpate();
     }
 
-    bool ShipsExist()
+    public bool ShipsExist()
     {
         int i = 0;
         foreach (int ship in ShipsCount)
@@ -289,8 +330,9 @@ public class FieldScript : MonoBehaviour {
             return true;
         return false;
     }
+        
 
-    void GenerateRandomField()
+    public void GenerateRandomField()
     {
         FieldClear();
         int selectedShip = 4;
@@ -321,6 +363,7 @@ public class FieldScript : MonoBehaviour {
 
     bool Shot(int X, int Y)
     {
+        AIcanShot = true;
         int cellStatus = field[X, Y].GetComponent<CellImgScript>().imgId;
         bool result = false;
         switch (cellStatus)
@@ -337,21 +380,22 @@ public class FieldScript : MonoBehaviour {
                 if (isDead(X, Y))
                 {
                     //убит
-
+                    WinCounter--;
                 }
                 else
                 {
                     //ранен
+                    WinCounter--;
                 }
                 break;
+            default:
+                AIcanShot = false;
+                break;
         }
+        CheckForWin();
         return result;
     }
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(200, 15, 150, 75), str);
-    }
+        
     public void Click(int X, int Y)
     {
         switch (GameState)
@@ -371,12 +415,103 @@ public class FieldScript : MonoBehaviour {
 
             case 1:
                 Shot(X, Y);
+                if (AiEnable)
+                {
+                    if (AIcanShot)
+                    {
+                        AIshot();
+                    }
+                    if (WinCounter <= 10)
+                    {
+                        AIcheatMode = true;
+                    }
+                }
                 break;
         }
         ShipForWindowUpate();
+        CheckForWin();
         //Shot(X, Y);
         //PlacingShip (3, 1, X, Y);
         //if (CheckIfShipAround(X,Y)) field[X, Y].GetComponent<CellImgScript>().imgId = 1;
+    }
+
+    void CheckForWin()
+    {
+        if (WinCounter == 0)
+        {
+            if (AiEnable)
+            {
+                CameraEnd.transform.position = new Vector3(180, 0, -10);
+            }
+            else
+            {
+                CameraEnd.transform.position = new Vector3(130, 0, -10);
+            }
+            WinCounter = 20;
+        }
+    }
+
+    bool AIshotListCheck(int X, int Y)
+    {
+        foreach (Coords point in AIshotList)
+        {
+            if ((point.X == X) && (point.Y == Y))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    void AIshot()
+    {
+        int targetX = Random.Range(0, 10);
+        int targetY = Random.Range(0, 10);
+
+
+        while (true)
+        {
+            bool flag = true;
+            if (AIshotListCheck(targetX, targetY))
+            {
+                targetX = Random.Range(0, 10);
+                targetY = Random.Range(0, 10);
+                flag = false;
+            }
+            if (flag)
+                break;
+        }
+        if (AIcheatMode)
+        {
+            int probability = Random.Range(0, 100);
+            List<Ship> opponentShips = new List<Ship>();
+            opponentShips.AddRange(opponent.GetComponent<FieldScript>().ShipsList);
+            foreach (Ship oShip in opponentShips)
+            {
+                foreach (Coords oShipCoords in oShip.ShipCoords)
+                {
+                    int XX = oShipCoords.X;
+                    int YY = oShipCoords.Y;
+                    if (!AIshotListCheck(XX, YY))
+                    {
+                        if (probability < 30)
+                        {
+                            targetX = XX;
+                            targetY = YY;
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        opponent.GetComponent<FieldScript>().Shot(targetX, targetY);
+        Coords c;
+        c.X = targetX;
+        c.Y = targetY;
+
+        AIshotList.Add(c);
+        CheckForWin();
     }
 
     void ShipForWindowInit()
@@ -405,30 +540,33 @@ public class FieldScript : MonoBehaviour {
     }
     void ShipForWindowUpate()
     {
-        for (int i = 0; i < 4; i++)
+        if (ShipforWindow)
         {
-            ShipForWindowX[i].GetComponent<CellImgScript>().imgId = 4;
-            ShipForWindowY[i].GetComponent<CellImgScript>().imgId = 4;
-        }
-        for (int i = 0; i < CurrentShipType; i++)
-        {
-            if (CurrentShipDirrection == 1)
-                ShipForWindowX[i].GetComponent<CellImgScript>().imgId = 1;
-            else
-                ShipForWindowY[i].GetComponent<CellImgScript>().imgId = 1;
+            for (int i = 0; i < 4; i++)
+            {
+                ShipForWindowX[i].GetComponent<CellImgScript>().imgId = 4;
+                ShipForWindowY[i].GetComponent<CellImgScript>().imgId = 4;
+            }
+            for (int i = 0; i < CurrentShipType; i++)
+            {
+                if (CurrentShipDirrection == 1)
+                    ShipForWindowX[i].GetComponent<CellImgScript>().imgId = 1;
+                else
+                    ShipForWindowY[i].GetComponent<CellImgScript>().imgId = 1;
+            }
         }
     }
 
-    void RotateButtonInit()
-    {
-        Vector3 startPose = transform.position;
-        Point startPoint;
-        startPoint = new Point(startPose.x - 8, startPose.y - 6);
-
-        rotateButton = Instantiate(rotateB);
-        rotateButton.transform.position = new Vector3(startPoint.x, startPoint.y, startPose.z);
-        rotateButton.GetComponent<RotateButtonScript>().parent = this.gameObject;
-    }
+//    void RotateButtonInit()
+//    {
+//        Vector3 startPose = transform.position;
+//        Point startPoint;
+//        startPoint = new Point(startPose.x - 8, startPose.y - 6);
+//
+//        rotateButton = Instantiate(rotateB);
+//        rotateButton.transform.position = new Vector3(startPoint.x, startPoint.y, startPose.z);
+//        rotateButton.GetComponent<RotateButtonScript>().parent = this.gameObject;
+//    }
 
     public void Rotate()
     {
@@ -443,15 +581,13 @@ public class FieldScript : MonoBehaviour {
 	void Start () {
         BuildField();
         ShipForWindowUpate();
-        RotateButtonInit();
+        if (HideShips)
+            GenerateRandomField();
+        //RotateButtonInit();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.R))
-            GenerateRandomField();
-        if (Input.GetKeyDown(KeyCode.C))
-            FieldClear();
         if (Input.GetKeyDown(KeyCode.Q))
             GameState = 1;
 	}
