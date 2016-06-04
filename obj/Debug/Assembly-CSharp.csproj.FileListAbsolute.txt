@@ -1,0 +1,42 @@
+D:\Programming\Unity\Sea Battle\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\Assembly-CSharp.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\Assembly-CSharp.pdb
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\UnityEditor.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\UnityEngine.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\UnityEngine.Networking.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\UnityEngine.UI.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\Mono.Cecil.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\Unity.SerializationLogic.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\Unity.DataContract.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\Unity.UNetWeaver.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\Unity.CecilTools.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\UnityEngine.xml
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\UnityEditor.xml
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\UnityEngine.UI.xml
+D:\Programming\Unity\Sea Battle\Temp\bin\Debug\UnityEngine.Networking.xml
+D:\Programming\Unity\Sea Battle\obj\Debug\Assembly-CSharp.dll
+D:\Programming\Unity\Sea Battle\obj\Debug\Assembly-CSharp.pdb
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\Assembly-CSharp.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\Assembly-CSharp.pdb
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\UnityEditor.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\UnityEngine.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\UnityEngine.Networking.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\UnityEngine.UI.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\Mono.Cecil.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\Unity.SerializationLogic.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\Unity.DataContract.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\Unity.UNetWeaver.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\Unity.CecilTools.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\UnityEngine.xml
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\UnityEditor.xml
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\UnityEngine.UI.xml
+D:\Programming\Unity\Sea-Battle-master\Temp\bin\Debug\UnityEngine.Networking.xml
+D:\Programming\Unity\Sea-Battle-master\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+D:\Programming\Unity\Sea-Battle-master\obj\Debug\Assembly-CSharp.dll
+D:\Programming\Unity\Sea-Battle-master\obj\Debug\Assembly-CSharp.pdb

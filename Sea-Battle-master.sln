@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{FA7383A1-550F-5D30-DC08-DA2770305B41}") = "Sea-Battle-master", "Assembly-CSharp.csproj", "{5CA87A48-7506-FDF7-75BF-99AC9EC75650}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CA87A48-7506-FDF7-75BF-99AC9EC75650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA87A48-7506-FDF7-75BF-99AC9EC75650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA87A48-7506-FDF7-75BF-99AC9EC75650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CA87A48-7506-FDF7-75BF-99AC9EC75650}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,16 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\structPoint.cs">
+    <Files>
+      <File FileName="Assets\Script\CellClick.cs" Line="25" Column="6" />
+      <File FileName="Assets\Script\CellImgScript.cs" Line="12" Column="3" />
+      <File FileName="Assets\Script\structPoint.cs" Line="13" Column="2" />
+      <File FileName="Assets\Script\FieldScript.cs" Line="423" Column="6" NotebookId="1" />
+      <File FileName="Assets\Script\RotateButtonScript.cs" Line="21" Column="29" NotebookId="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
