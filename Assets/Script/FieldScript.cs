@@ -429,10 +429,6 @@ public class FieldScript : MonoBehaviour {
                 break;
         }
         ShipForWindowUpate();
-        CheckForWin();
-        //Shot(X, Y);
-        //PlacingShip (3, 1, X, Y);
-        //if (CheckIfShipAround(X,Y)) field[X, Y].GetComponent<CellImgScript>().imgId = 1;
     }
 
     void CheckForWin()
@@ -448,6 +444,7 @@ public class FieldScript : MonoBehaviour {
                 CameraEnd.transform.position = new Vector3(130, 0, -10);
             }
             WinCounter = 20;
+            opponent.GetComponent<FieldScript>().WinCounter = 20;
         }
     }
 
@@ -556,17 +553,7 @@ public class FieldScript : MonoBehaviour {
             }
         }
     }
-
-//    void RotateButtonInit()
-//    {
-//        Vector3 startPose = transform.position;
-//        Point startPoint;
-//        startPoint = new Point(startPose.x - 8, startPose.y - 6);
-//
-//        rotateButton = Instantiate(rotateB);
-//        rotateButton.transform.position = new Vector3(startPoint.x, startPoint.y, startPose.z);
-//        rotateButton.GetComponent<RotateButtonScript>().parent = this.gameObject;
-//    }
+        
 
     public void Rotate()
     {
@@ -583,7 +570,6 @@ public class FieldScript : MonoBehaviour {
         ShipForWindowUpate();
         if (HideShips)
             GenerateRandomField();
-        //RotateButtonInit();
 	}
 	
 	// Update is called once per frame
